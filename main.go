@@ -75,10 +75,16 @@ func ReadConfigs() {
 			fmt.Println(conf.Value)
 		default:
 			// Do size based processing
-			size, err := units.FromHumanSize(conf.Value.(string))
+			hsize, err := units.FromHumanSize(conf.Value.(string))
 			if err != nil {
 				panic(err)
 			}
+			// Do size based processing
+			size, err := units.RAMInBytes(conf.Value.(string))
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("from human size:", hsize)
 			fmt.Println("from human size to bytes: ", strconv.FormatInt(size, 10))
 			fmt.Println(conf.Value)
 		}

@@ -9,7 +9,7 @@ doc_confs = new Mapping {
             }
             new {
                 name = "DOC_MAX_SIZE"
-                val = 20.mib
+                val = 80.mib
                 type = "size"
             }
             new {
