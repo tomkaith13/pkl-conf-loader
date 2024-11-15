@@ -13,14 +13,16 @@ type ConfigElem struct {
 	Value    any    `pkl:"val" json:"val"`
 	ElemType string `pkl:"type" json:"type"`
 }
+
 type Configs struct {
-	Foo     string       `pkl:"foo" json:"foo"`
+	// Foo     string       `pkl:"foo" json:"foo"`
 	Configs []ConfigElem `pkl:"configs" json:"configs"`
 }
 
-// type DocConfigs struct {
-// 	DocConfigs map[string]map[string]Configs `pkl:"doc_confs"`
-// }
+type DocConfigs struct {
+	Foo        string                        `pkl:"foo" json:"foo"`
+	DocConfigs map[string]map[string]Configs `pkl:"doc_confs" json:"doc_confs"`
+}
 
 func ReadConfigs() {
 	evaluator, err := pkl.NewEvaluator(context.Background(), pkl.PreconfiguredOptions)
@@ -37,7 +39,7 @@ func ReadConfigs() {
 	}
 	fmt.Println(textOutput)
 
-	var cfg Configs
+	var cfg DocConfigs
 
 	// Alert!!
 	//  This does not work due to panic when trying to parse ConfigElem, so  resorting to json
@@ -52,7 +54,25 @@ func ReadConfigs() {
 		panic(err)
 	}
 
-	fmt.Printf("doc config:  %+v", cfg)
+	fmt.Printf("doc config:  %+v\n", cfg)
+	cap_conf, ok := cfg.DocConfigs["test"]["cap1"]
+	if !ok {
+		panic("Unable to decode")
+	}
+
+	for _, conf := range cap_conf.Configs {
+		switch conf.ElemType {
+		case "csv":
+			// do more processing on list
+			fmt.Println(conf.Value)
+		case "boolean":
+			// set some flag
+			fmt.Println(conf.Value)
+		default:
+			// Do size based processing
+			fmt.Println(conf.Value)
+		}
+	}
 }
 
 func main() {

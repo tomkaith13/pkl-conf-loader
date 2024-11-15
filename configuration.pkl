@@ -1,50 +1,10 @@
-// doc_confs = new Mapping {
-//     ["hm-test"] = new Mapping {
-//         ["messaging"] {
-//             configs = new Listing {
-//             new {
-//                 name = "PRE_PROCESS"
-//                 val = true
-//                 type = "boolean"
-//             }
-//             new {
-//                 name = "DOC_MAX_SIZE"
-//                 val = 20.mib
-//                 type = "size"
-//             }
-//             new {
-//                 name = "DOC_MIMES"
-//                 val = "pdf,docx,jpg,heic"
-//                 type = "csv"
-//             }
-//             }
-//         }
-//         ["claims"] {
-//             configs = new Listing {
-//             new {
-//                 name = "PRE_PROCESS"
-//                 val = true
-//                 type = "boolean"
-//             }
-//             new {
-//                 name = "DOC_MAX_SIZE"
-//                 val = 20.mib
-//                 type = "size"
-//             }
-//             new {
-//                 name = "DOC_MIMES"
-//                 val = "pdf,docx,jpg,heic"
-//                 type = "csv"
-//             }
-//             }
-//         }
-//     }
-// }
-foo = "FOO"
-configs = new Listing {
+doc_confs = new Mapping {
+    ["test"] = new Mapping {
+        ["cap1"] {
+            configs = new Listing {
             new {
                 name = "PRE_PROCESS"
-                val = "true"
+                val = true
                 type = "boolean"
             }
             new {
@@ -57,7 +17,47 @@ configs = new Listing {
                 val = "pdf,docx,jpg,heic"
                 type = "csv"
             }
+            }
+        }
+        ["cap2"] {
+            configs = new Listing {
+            new {
+                name = "PRE_PROCESS"
+                val = true
+                type = "boolean"
+            }
+            new {
+                name = "DOC_MAX_SIZE"
+                val = 20.mib
+                type = "size"
+            }
+            new {
+                name = "DOC_MIMES"
+                val = "pdf,docx,jpg,heic"
+                type = "csv"
+            }
+            }
+        }
+    }
 }
+foo = "FOO"
+// configs = new Listing {
+//             new {
+//                 name = "PRE_PROCESS"
+//                 val = "true"
+//                 type = "boolean"
+//             }
+//             new {
+//                 name = "DOC_MAX_SIZE"
+//                 val = 20.mib
+//                 type = "size"
+//             }
+//             new {
+//                 name = "DOC_MIMES"
+//                 val = "pdf,docx,jpg,heic"
+//                 type = "csv"
+//             }
+// }
 
 
 output {
