@@ -40,7 +40,7 @@ func ReadConfigs() {
 	var cfg Configs
 
 	// Alert!!
-	//  This does not work due to panic to resorting to json
+	//  This does not work due to panic when trying to parse ConfigElem, so  resorting to json
 	//
 	// if err = evaluator.EvaluateModule(
 	// 	context.Background(),
