@@ -2,19 +2,20 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/apple/pkl-go/pkl"
 )
 
 type ConfigElem struct {
-	Name     string `pkl:"name"`
-	Value    string `pkl:"val"`
-	ElemType string `pkl:"type"`
+	Name     string `pkl:"name" json:"name"`
+	Value    any    `pkl:"val" json:"val"`
+	ElemType string `pkl:"type" json:"type"`
 }
 type Configs struct {
-	Foo     string       `pkl:"foo"`
-	Configs []ConfigElem `pkl:"configs"`
+	Foo     string       `pkl:"foo" json:"foo"`
+	Configs []ConfigElem `pkl:"configs" json:"configs"`
 }
 
 // type DocConfigs struct {
@@ -37,9 +38,17 @@ func ReadConfigs() {
 	fmt.Println(textOutput)
 
 	var cfg Configs
-	if err = evaluator.EvaluateModule(
-		context.Background(),
-		pkl.FileSource("./configuration.pkl"), &cfg); err != nil {
+
+	// Alert!!
+	//  This does not work due to panic to resorting to json
+	//
+	// if err = evaluator.EvaluateModule(
+	// 	context.Background(),
+	// 	pkl.FileSource("./configuration.pkl"), &cfg); err != nil {
+	// 	panic(err)
+	// }
+	err = json.Unmarshal([]byte(textOutput), &cfg)
+	if err != nil {
 		panic(err)
 	}
 
