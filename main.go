@@ -13,8 +13,8 @@ type ConfigElem struct {
 	ElemType string `pkl:"type"`
 }
 type Configs struct {
-	Foo string `pkl:"foo"`
-	// Configs []ConfigElem `pkl:"configs"`
+	Foo     string       `pkl:"foo"`
+	Configs []ConfigElem `pkl:"configs"`
 }
 
 // type DocConfigs struct {

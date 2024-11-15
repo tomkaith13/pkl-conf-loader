@@ -47,16 +47,6 @@ configs = new Listing {
                 val = "true"
                 type = "boolean"
             }
-            // new {
-            //     name = "DOC_MAX_SIZE"
-            //     val = "20.mib"
-            //     type = "size"
-            // }
-            // new {
-            //     name = "DOC_MIMES"
-            //     val = "pdf,docx,jpg,heic"
-            //     type = "csv"
-            // }
 }
 
 
