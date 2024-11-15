@@ -17,6 +17,11 @@ doc_confs = new Mapping {
                 val = "pdf,docx,jpg,heic"
                 type = "csv"
             }
+            new {
+                name = "doc_timeout"
+                val = 30.s
+                type = "duration"
+            }
             }
         }
         ["cap2"] {
@@ -64,6 +69,7 @@ output {
   renderer = new JsonRenderer {
     converters {
       [DataSize] = (size) -> "\(size.value)\(size.unit)"
+      [Duration] = (dur) -> "\(dur.value)\(dur.unit)"
     }
   }
 }

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/apple/pkl-go/pkl"
 	"github.com/docker/go-units"
@@ -73,7 +74,7 @@ func ReadConfigs() {
 		case "boolean":
 			// set some flag
 			fmt.Println(conf.Value)
-		default:
+		case "size":
 			// Do size based processing
 			hsize, err := units.FromHumanSize(conf.Value.(string))
 			if err != nil {
@@ -87,6 +88,18 @@ func ReadConfigs() {
 			fmt.Println("from human size:", hsize)
 			fmt.Println("from human size to bytes: ", strconv.FormatInt(size, 10))
 			fmt.Println(conf.Value)
+		case "duration":
+			// Do duration based processing
+			// sadly, there is way to transform duration correctly from PKL to stdlib durations
+			// things like 10.min and 10d will cause an error.
+			// Compare https://pkl-lang.org/package-docs/pkl/0.27.0/base/index.html#DurationUnit
+			// to https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/time/format.go;l=1601
+			duration, err := time.ParseDuration(conf.Value.(string))
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("duration:", duration)
+
 		}
 	}
 }
