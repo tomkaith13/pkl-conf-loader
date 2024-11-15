@@ -4,8 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"github.com/apple/pkl-go/pkl"
+	"github.com/docker/go-units"
 )
 
 type ConfigElem struct {
@@ -70,6 +72,11 @@ func ReadConfigs() {
 			fmt.Println(conf.Value)
 		default:
 			// Do size based processing
+			size, err := units.FromHumanSize(conf.Value.(string))
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("from human size to bytes: ", strconv.FormatInt(size, 10))
 			fmt.Println(conf.Value)
 		}
 	}
