@@ -91,7 +91,7 @@ func ReadConfigs() {
 		case "duration":
 			// Do duration based processing
 			// sadly, there is way to transform duration correctly from PKL to stdlib durations
-			// things like 10.min and 10d will cause an error.
+			// things like 10.min and 10.d will cause an error.
 			// Compare https://pkl-lang.org/package-docs/pkl/0.27.0/base/index.html#DurationUnit
 			// to https://cs.opensource.google/go/go/+/refs/tags/go1.23.3:src/time/format.go;l=1601
 			duration, err := time.ParseDuration(conf.Value.(string))
