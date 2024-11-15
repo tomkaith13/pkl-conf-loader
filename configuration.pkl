@@ -1,0 +1,69 @@
+// doc_confs = new Mapping {
+//     ["hm-test"] = new Mapping {
+//         ["messaging"] {
+//             configs = new Listing {
+//             new {
+//                 name = "PRE_PROCESS"
+//                 val = true
+//                 type = "boolean"
+//             }
+//             new {
+//                 name = "DOC_MAX_SIZE"
+//                 val = 20.mib
+//                 type = "size"
+//             }
+//             new {
+//                 name = "DOC_MIMES"
+//                 val = "pdf,docx,jpg,heic"
+//                 type = "csv"
+//             }
+//             }
+//         }
+//         ["claims"] {
+//             configs = new Listing {
+//             new {
+//                 name = "PRE_PROCESS"
+//                 val = true
+//                 type = "boolean"
+//             }
+//             new {
+//                 name = "DOC_MAX_SIZE"
+//                 val = 20.mib
+//                 type = "size"
+//             }
+//             new {
+//                 name = "DOC_MIMES"
+//                 val = "pdf,docx,jpg,heic"
+//                 type = "csv"
+//             }
+//             }
+//         }
+//     }
+// }
+foo = "FOO"
+configs = new Listing {
+            new {
+                name = "PRE_PROCESS"
+                val = "true"
+                type = "boolean"
+            }
+            // new {
+            //     name = "DOC_MAX_SIZE"
+            //     val = "20.mib"
+            //     type = "size"
+            // }
+            // new {
+            //     name = "DOC_MIMES"
+            //     val = "pdf,docx,jpg,heic"
+            //     type = "csv"
+            // }
+}
+
+
+output {
+  renderer = new JsonRenderer {
+    converters {
+      [DataSize] = (size) -> "\(size.value)\(size.unit)"
+    }
+  }
+}
