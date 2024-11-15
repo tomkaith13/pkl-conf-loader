@@ -43,6 +43,7 @@ func ReadConfigs() {
 
 	var cfg DocConfigs
 
+	//  ====================================================================================
 	// Alert!!
 	//  This does not work due to panic when trying to parse ConfigElem, so  resorting to json
 	//
@@ -51,6 +52,8 @@ func ReadConfigs() {
 	// 	pkl.FileSource("./configuration.pkl"), &cfg); err != nil {
 	// 	panic(err)
 	// }
+	//  ====================================================================================
+
 	err = json.Unmarshal([]byte(textOutput), &cfg)
 	if err != nil {
 		panic(err)
