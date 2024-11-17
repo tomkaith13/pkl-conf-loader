@@ -46,25 +46,9 @@ doc_confs = new Mapping {
     }
 }
 foo = "FOO"
-// configs = new Listing {
-//             new {
-//                 name = "PRE_PROCESS"
-//                 val = "true"
-//                 type = "boolean"
-//             }
-//             new {
-//                 name = "DOC_MAX_SIZE"
-//                 val = 20.mib
-//                 type = "size"
-//             }
-//             new {
-//                 name = "DOC_MIMES"
-//                 val = "pdf,docx,jpg,heic"
-//                 type = "csv"
-//             }
-// }
 
 
+// Convertors for json rendering of Datasize and Duration
 output {
   renderer = new JsonRenderer {
     converters {
