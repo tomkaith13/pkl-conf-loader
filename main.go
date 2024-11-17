@@ -61,6 +61,7 @@ func ReadConfigs(isFile bool, textPkl string) {
 	//  ====================================================================================
 	// Alert!!
 	//  This does not work due to panic when trying to parse ConfigElem, so  resorting to json
+	// panic: reflect.Value.SetMapIndex: value of type pkl.Object is not assignable to type main.Configs
 	//
 	// if err = evaluator.EvaluateModule(
 	// 	context.Background(),
