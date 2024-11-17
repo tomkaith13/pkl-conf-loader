@@ -45,8 +45,6 @@ doc_confs = new Mapping {
         }
     }
 }
-foo = "FOO"
-
 
 // Convertors for json rendering of Datasize and Duration
 output {
