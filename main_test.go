@@ -48,7 +48,7 @@ func TestReadConfigFromText(t *testing.T) {
             }
             new {
                 name = "DOC_MAX_SIZE"
-                val = 20.mib
+                val = 20.mb
                 type = "size"
             }
             new {

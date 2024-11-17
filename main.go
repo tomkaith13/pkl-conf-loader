@@ -90,18 +90,25 @@ func ReadConfigs(isFile bool, textPkl string) {
 			// set some flag
 			fmt.Println(conf.Value)
 		case "size":
+			sizeStr := conf.Value.(string)
+			if strings.Contains(sizeStr, "ib") {
+
+				// Do size based processing
+				size, err := units.RAMInBytes(sizeStr)
+				if err != nil {
+					panic(err)
+				}
+				fmt.Println("from human size to bytes: ", strconv.FormatInt(size, 10))
+				continue
+			}
+
 			// Do size based processing
 			hsize, err := units.FromHumanSize(conf.Value.(string))
 			if err != nil {
 				panic(err)
 			}
-			// Do size based processing
-			size, err := units.RAMInBytes(conf.Value.(string))
-			if err != nil {
-				panic(err)
-			}
 			fmt.Println("from human size:", hsize)
-			fmt.Println("from human size to bytes: ", strconv.FormatInt(size, 10))
+
 			fmt.Println(conf.Value)
 		case "duration":
 			// Do duration based processing
