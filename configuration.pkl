@@ -19,7 +19,7 @@ doc_confs = new Mapping {
             }
             new {
                 name = "doc_timeout"
-                val = 30.s
+                val = 15.min
                 type = "duration"
             }
             }
