@@ -85,7 +85,9 @@ func ReadConfigs(isFile bool, textPkl string) {
 		switch conf.ElemType {
 		case "csv":
 			// do more processing on list
-			fmt.Println(conf.Value)
+			csvStr := conf.Value.(string)
+			csvList := strings.Split(csvStr, ",")
+			fmt.Println(csvList)
 		case "boolean":
 			// set some flag
 			fmt.Println(conf.Value)
