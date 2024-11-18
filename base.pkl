@@ -1,5 +1,6 @@
 class ConfigElem {
     name: String
     val: Any
-    type: String
+    type: TypeEnum
 }
+typealias TypeEnum = "csv"|"duration"|"size"|"boolean" 
