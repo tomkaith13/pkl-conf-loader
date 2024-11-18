@@ -60,12 +60,14 @@ func ReadConfigs(isFile bool, textPkl string) {
 
 	//  ====================================================================================
 	// Alert!!
-	//  This does not work due to panic when trying to parse ConfigElem, so  resorting to json
-	// panic: reflect.Value.SetMapIndex: value of type pkl.Object is not assignable to type main.Configs
+	// This does not work due to panic when trying to parse ConfigElem, so  resorting to json
+	// panic: cannot decode Pkl value of type `base#ConfigElem` into Go type `interface {}`.
+	// Define a custom mapping for this using `pkl.RegisterMapping`
 	//
+	// var pklConf DocConfigs
 	// if err = evaluator.EvaluateModule(
 	// 	context.Background(),
-	// 	pkl.FileSource("./configuration.pkl"), &cfg); err != nil {
+	// 	pkl.FileSource("./configuration.pkl"), &pklConf); err != nil {
 	// 	panic(err)
 	// }
 	//  ====================================================================================

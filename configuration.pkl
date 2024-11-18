@@ -1,4 +1,5 @@
 import "base.pkl"
+
 doc_confs = new Mapping {
     ["test"] = new Mapping {
         ["cap1"] {
