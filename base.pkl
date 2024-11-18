@@ -1,0 +1,5 @@
+class ConfigElem {
+    name: String
+    val: Any
+    type: String
+}

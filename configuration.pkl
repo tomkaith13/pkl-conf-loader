@@ -1,23 +1,24 @@
+import "base.pkl"
 doc_confs = new Mapping {
     ["test"] = new Mapping {
         ["cap1"] {
-            configs = new Listing {
-            new {
+            configs = new Listing{
+            new base.ConfigElem {
                 name = "PRE_PROCESS"
                 val = true
                 type = "boolean"
             }
-            new {
+            new base.ConfigElem {
                 name = "DOC_MAX_SIZE"
                 val = 80.mib
                 type = "size"
             }
-            new {
+            new base.ConfigElem {
                 name = "DOC_MIMES"
                 val = "pdf,docx,jpg,heic"
                 type = "csv"
             }
-            new {
+            new base.ConfigElem {
                 name = "doc_timeout"
                 val = 15.min
                 type = "duration"
@@ -26,17 +27,17 @@ doc_confs = new Mapping {
         }
         ["cap2"] {
             configs = new Listing {
-            new {
+            new  base.ConfigElem {
                 name = "PRE_PROCESS"
                 val = true
                 type = "boolean"
             }
-            new {
+            new  base.ConfigElem {
                 name = "DOC_MAX_SIZE"
                 val = 20.mib
                 type = "size"
             }
-            new {
+            new  base.ConfigElem {
                 name = "DOC_MIMES"
                 val = "pdf,docx,jpg,heic"
                 type = "csv"
