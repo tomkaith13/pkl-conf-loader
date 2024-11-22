@@ -7,4 +7,4 @@ class ConfigElemV2 {
     val: Any
     type: TypeEnum
 }
-typealias TypeEnum = "csv"|"duration"|"size"|"boolean" 
+typealias TypeEnum = "csv"|"duration"|"size"|"boolean|array" 
