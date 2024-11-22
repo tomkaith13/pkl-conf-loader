@@ -3,4 +3,8 @@ class ConfigElem {
     val: Any
     type: TypeEnum
 }
+class ConfigElemV2 {
+    val: Any
+    type: TypeEnum
+}
 typealias TypeEnum = "csv"|"duration"|"size"|"boolean" 

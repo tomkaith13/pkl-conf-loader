@@ -1,0 +1,35 @@
+import "base.pkl"
+
+doc_confs = new Mapping {
+    ["test"] = new Mapping {
+        ["cap1"] {
+            ["PRE_PROCESS"] {
+                val = true
+                type = "boolean"
+            }
+            ["DOC_MAX_SIZE"] {
+                val = 80.mib
+                type = "size"
+            }
+            ["DOC_MIMES"] {
+                val = List("docx", "pdf", "jpg")
+                type = "array"
+            }
+            ["DOC_TTL"] {
+                val = 15.min
+                type = "duration"
+            }
+
+        }
+    }
+}
+
+// Convertors for json rendering of Datasize and Duration
+output {
+  renderer = new JsonRenderer {
+    converters {
+      [DataSize] = (size) -> "\(size.value)\(size.unit)"
+      [Duration] = (dur) -> "\(dur.value)\(dur.unit)"
+    }
+  }
+}
