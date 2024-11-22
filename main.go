@@ -38,8 +38,18 @@ type DocConfigsV2 struct {
 	DocConfigsV2 map[string]map[string]map[string]ConfigElemV2 `json:"doc_confs"`
 }
 
+// v3
+type ConfigElemV3 struct {
+	Value any `json:"val"`
+}
+
+type DocConfigsV3 struct {
+	DocConfigsV3 map[string]map[string]map[string]ConfigElemV3 `json:"doc_confs"`
+}
+
 const ConfigurationFile string = "./configuration.pkl"
 const ConfigurationFileV2 string = "./configurationv2.pkl"
+const ConfigurationFileV3 string = "./configurationv3.pkl"
 
 func ReadConfigs(isFile bool, textPkl string) {
 	evaluator, err := pkl.NewEvaluator(context.Background(), pkl.PreconfiguredOptions)
@@ -279,8 +289,50 @@ func ReadConfigsV2(isFile bool, textPkl string) {
 	}
 
 }
+func ReadConfigsV3(isFile bool, textPkl string) {
+	evaluator, err := pkl.NewEvaluator(context.Background(), pkl.PreconfiguredOptions)
+	if err != nil {
+		panic(err)
+	}
+	defer evaluator.Close()
+
+	var textOutput string
+	if isFile {
+		textOutput, err = evaluator.EvaluateOutputText(
+			context.Background(),
+			pkl.FileSource(ConfigurationFileV3))
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(textOutput)
+	} else {
+		textOutput, err = evaluator.EvaluateOutputText(
+			context.Background(),
+			pkl.TextSource(textPkl))
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(textOutput)
+	}
+	var cfg DocConfigsV3
+	err = json.Unmarshal([]byte(textOutput), &cfg)
+	if err != nil {
+		panic(err)
+	}
+
+	cap_conf, ok := cfg.DocConfigsV3["test"]["cap1"]
+	if !ok {
+		panic("Unable to decode")
+	}
+	fmt.Printf("doc config:  %+v\n", cap_conf)
+
+	// now you need to hardcode each value decoding logic.
+	// Like DOC_TTL should be decoded as a Duration and nothin else!
+
+}
 
 func main() {
 	ReadConfigs(true, "")
 	ReadConfigsV2(true, "")
+	ReadConfigsV3(true, "")
 }
