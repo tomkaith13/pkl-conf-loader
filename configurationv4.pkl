@@ -1,0 +1,22 @@
+doc_confs = new Mapping {
+    ["test"] = new Mapping {
+        ["cap1"] {
+            
+            PreProcess = true    
+            DocMaxSize = 80.mib
+            DocMimes = List("docx", "pdf", "jpg")
+            DocTTL = 15.min
+
+        }
+    }
+}
+
+// Convertors for json rendering of Datasize and Duration
+output {
+  renderer = new JsonRenderer {
+    converters {
+      [DataSize] = (size) -> "\(size.value)\(size.unit)"
+      [Duration] = (dur) -> "\(dur.value)\(dur.unit)"
+    }
+  }
+}
