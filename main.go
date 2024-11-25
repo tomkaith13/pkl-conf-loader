@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -376,6 +377,82 @@ func ReadConfigsV4(isFile bool, textPkl string) {
 
 	// now you need to hardcode each value decoding logic.
 	// Like DOC_TTL should be decoded as a Duration and nothin else!
+	if val, ok := cap_conf["PRE_PROCESS"]; ok {
+		valBool, ok := val.(bool)
+		if ok {
+			fmt.Println("PRE_PROCESS:", valBool)
+		}
+	}
+
+	if val, ok := cap_conf["DOC_MAX_SIZE"]; ok {
+		sizeStr, ok := val.(string)
+		if ok {
+			fmt.Println("DOC_MAX_SIZE:", sizeStr)
+
+			if strings.Contains(sizeStr, "ib") {
+
+				// Do size based processing
+				size, err := units.RAMInBytes(sizeStr)
+				if err != nil {
+					panic(err)
+				}
+				fmt.Println("from human size to bytes: ", strconv.FormatInt(size, 10))
+			} else {
+				// Do size based processing
+				hsize, err := units.FromHumanSize(sizeStr)
+				if err != nil {
+					panic(err)
+				}
+				fmt.Println("from human size:", hsize)
+			}
+		}
+	}
+
+	if val, ok := cap_conf["DOC_MIMES"]; ok {
+		fmt.Println("val:", val)
+		val := reflect.ValueOf(val)
+		mime_types := make([]string, val.Len())
+		for i := 0; i < val.Len(); i++ {
+			mime := val.Index(i).Interface()
+			mime_types[i] = mime.(string)
+
+		}
+		fmt.Println("DOC_MIMES:", mime_types)
+	}
+
+	if val, ok := cap_conf["DOC_TTL"]; ok {
+		durationStr, ok := val.(string)
+		if ok {
+			if strings.Contains(durationStr, "min") {
+				dur := strings.Split(durationStr, "min")
+				mins, err := strconv.Atoi(dur[0])
+				if err != nil {
+					panic(err)
+				}
+
+				duration := time.Duration(mins) * time.Minute
+				fmt.Println("duration:", duration)
+			} else if strings.Contains(durationStr, "d") {
+				dur := strings.Split(durationStr, "d")
+				days, err := strconv.Atoi(dur[0])
+				if err != nil {
+					panic(err)
+				}
+
+				duration := time.Duration(days) * time.Hour * 24
+				fmt.Println("duration:", duration)
+
+			} else {
+				duration, err := time.ParseDuration(durationStr)
+				if err != nil {
+					panic(err)
+				}
+				fmt.Println("duration:", duration)
+			}
+
+		}
+
+	}
 
 }
 

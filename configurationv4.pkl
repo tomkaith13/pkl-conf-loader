@@ -2,10 +2,10 @@ doc_confs = new Mapping {
     ["test"] = new Mapping {
         ["cap1"] {
             
-            PreProcess = true    
-            DocMaxSize = 80.mib
-            DocMimes = List("docx", "pdf", "jpg")
-            DocTTL = 15.min
+            PRE_PROCESS = true    
+            DOC_MAX_SIZE = 80.mib
+            DOC_MIMES = List("docx", "pdf", "jpg")
+            DOC_TTL = 15.min
 
         }
     }
