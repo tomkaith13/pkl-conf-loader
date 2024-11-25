@@ -1,3 +1,4 @@
+// same as configurationV3 .. just more terse
 doc_confs = new Mapping {
     ["test"] = new Mapping {
         ["cap1"] {
